@@ -1,0 +1,8 @@
+Comandos Git utilizados
+
+init
+add .
+commit
+remote
+push
+checkout

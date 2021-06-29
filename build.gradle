@@ -1,19 +1,36 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
 
-group 'org.example'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+project.ext {
+    cucumberVersion = '5.6.0'
 }
 
-test {
-    useJUnitPlatform()
+dependencies {
+    testImplementation 'io.cucumber:cucumber-java:' + cucumberVersion
+    testImplementation 'io.cucumber:cucumber-junit:5.6.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.outpu + sourceSets.test.output
+            args = ['--plugin', 'html:reports/test-report', '--plugin', 'pretty', '--glue','DownloadPdf', 'src/test/resources']
+        }
+    }
 }

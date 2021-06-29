@@ -24,8 +24,8 @@ public class ingresarA {
     }
 
     @After
-    public void AprenderEsFacil()throws Throwable{
-        AprenderEsFacilPO.urlAprenderEsFacil(this.driver);
+    public static void AprenderEsFacil(WebDriver driver)throws Throwable{
+        AprenderEsFacilPO.urlAprenderEsFacil(driver);
     }
 
 }

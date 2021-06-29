@@ -1,5 +1,6 @@
 package Step.DownloadPdf.StepDefinition;
 
+import Step.DownloadPdf.Task.ingresarA;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -26,7 +27,7 @@ public class DownloadPdfSD {
     public void EnteringTheLearnSectionIsEasy()throws Throwable{
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.get(baseUrl);
-
+        ingresarA.AprenderEsFacil(webDriver);
     }
 
     @When("Descargar el pdf de Fatca y CRS")
